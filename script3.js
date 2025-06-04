@@ -1,33 +1,43 @@
-registro = []
+let registro = [];
 
 function validar(){
-    let eTelefono = document.getElementById('telefono') //telefono debe tener exactamente 8 digitos, no es obligatoria
-    let vTelefono = eTelefono.value
-    eErrorTelefono = document-getElementById('errorTelefono')
-    if (eTelefono <= 8){
-        registro.push(eTelefono)
-        console.log("Telefono registrado")
+    let eTelefono = document.getElementById('telefono');
+    let vTelefono = eTelefono.value.trim();
+    let eErrorTelefono = document.getElementById('errorTelefono');
 
-    let eContraseña = documento.getElementById('password') //contrasenia debe tener mas de 5 caracteres, es obligatoria
-    let vContraseña = eContraseña.value
-    eErrorContraseña = document.getElementById('errorPassword')
-    if (eContraseña >= 5){
-        registro.push(eContraseña)
-        console.log("Contraseña registrada")
-    
-    }}
+    let ePassword = document.getElementById('password');
+    let vPassword = ePassword.value.trim();
+    let eErrorPassword = document.getElementById('errorPassword');
 
-function eliminar(){
-    if(eTelefono == eTelefono){
-        eTelefono.innerText
-        console.log("Registro eliminado")
-    }
-    if(eContraseña == eContraseña){
-        eContraseña.innerText
-        console.log("Contraseña eliminada")
-    }
+    let esValido = false;
+    //Validacion del telefono
+    if (vTelefono.lenght == 8) {
+        esValido = true;
+        eErrorTelefono.textContent = "";
+    } else {
+        eErrorTelefono.textContent = "El teléfono debe tener 8 dígitos.";}
+        esValido = false;
+    //Validacion de password
+    if (vPassword.length <= 5) {
+        eErrorPassword.textContent = "";
+        esValido = true;
+    } else {
+        eErrorPassword.textContent = "La contraseña debe tener más de 5 caracteres.";
+        esValido = false;}
+
+    if (esValido) {
+        let T ={
+            eTelefono : vTelefono
+        }
+        registro.push({ telefono: vTelefono, password: vPassword });
+        mostrarTabla();
+        document.getElementById('miFormulario').reset();
     }
 }
-function almacenar(){
+//función cargar datos
+function mostrarTabla(){
+    let CuerpoTabla = document.getElementById('cuerpoTabla')
+    let registroMap = registro.map((T,index))
+        return "<td><button onclick='eliminar("+index+")'>Eliminar</button><button onclick='actualizarForm("+index+")'>Actualizar</button></td></tr>"
 
 }
